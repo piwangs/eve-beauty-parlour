@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin — Clara's Beauty Parlour</title>
+  <style>
+    :root {
+      --bg: #fdf7f4; --surface: #fff; --ink: #2b2027; --muted: #7a6b73;
+      --primary: #b0587a; --primary-dark: #8e4260; --soft: #f7e6ed;
+      --line: #f0e2e8; --ok: #1f8a55; --warn: #b8860b; --danger: #c0392b;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, sans-serif; background: var(--bg); color: var(--ink); }
+    a { color: var(--primary-dark); }
+    .gate {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+      padding: 28px; width: 100%; max-width: 400px; box-shadow: 0 12px 40px rgba(43,32,39,.08);
+    }
+    .card h1 { margin: 0 0 6px; font-size: 1.4rem; }
+    .card p { color: var(--muted); font-size: .9rem; margin: 0 0 18px; }
+    label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 6px; }
+    input, select, textarea {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px;
+      font: inherit; margin-bottom: 12px; background: #fff;
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); border-color: transparent; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      border: none; border-radius: 999px; padding: 10px 18px; font: inherit; font-weight: 600;
+      cursor: pointer; background: var(--primary); color: #fff;
+    }
+    .btn:hover { background: var(--primary-dark); }
+    .btn-ghost { background: #fff; color: var(--primary-dark); border: 1px solid var(--line); }
+    .btn-danger { background: var(--danger); }
+    .btn-sm { padding: 6px 12px; font-size: .82rem; }
+    .btn-block { width: 100%; }
+    .hidden { display: none !important; }
+    header.app-bar {
+      position: sticky; top: 0; z-index: 20; background: rgba(253,247,244,.95);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+    }
+    .app-bar-inner {
+      max-width: 1100px; margin: 0 auto; padding: 12px 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .brand { font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .brand span {
+      width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff; display: grid; place-items: center; font-size: .9rem;
+    }
+    .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tabs button {
+      border: 1px solid var(--line); background: #fff; border-radius: 999px;
+      padding: 7px 14px; font: inherit; font-size: .85rem; cursor: pointer;
+    }
+    .tabs button.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    @media (min-width: 700px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+    .stat {
+      background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px;
+    }
+    .stat label { color: var(--muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; margin: 0; }
+    .stat strong { display: block; font-size: 1.5rem; margin-top: 4px; }
+    .stat strong.warn { color: var(--warn); }
+    .stat strong.danger { color: var(--danger); }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .toolbar input { margin: 0; max-width: 240px; }
+    .toolbar select { margin: 0; max-width: 160px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); font-size: .88rem; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+    th { background: var(--soft); font-size: .75rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: .72rem; font-weight: 600; }
+    .badge.ok { background: #e5f6ec; color: var(--ok); }
+    .badge.low { background: #fff3d6; color: var(--warn); }
+    .badge.out { background: #fde8e6; color: var(--danger); }
+    .actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .panel { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+    .panel h2 { margin: 0 0 12px; font-size: 1.1rem; }
+    .grid-2 { display: grid; gap: 12px; }
+    @media (min-width: 640px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (min-width: 700px) { .photo-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 900px) { .photo-grid { grid-template-columns: repeat(4, 1fr); } }
+    .photo-card { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 1; background: var(--soft); border: 1px solid var(--line); }
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-card .meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px 10px 10px; background: linear-gradient(transparent, rgba(0,0,0,.7)); color: #fff; font-size: .78rem; }
+    .photo-card .del {
+      position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%;
+      border: none; background: rgba(192,57,43,.9); color: #fff; cursor: pointer; font-size: .9rem;
+    }
+    .status-pill { font-size: .78rem; color: var(--muted); }
+    .status-pill.on { color: var(--ok); }
+    .drop {
+      border: 2px dashed var(--line); border-radius: 16px; padding: 24px; text-align: center;
+      background: var(--soft); cursor: pointer; margin-bottom: 12px;
+    }
+    .drop.drag { border-color: var(--primary); background: #fff; }
+    .drop input { display: none; }
+    .preview-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+    .preview-row img { width: 72px; height: 72px; object-fit: cover; border-radius: 10px; }
+    .err { color: var(--danger); font-size: .85rem; }
+    .okmsg { color: var(--ok); font-size: .85rem; }
+    .muted { color: var(--muted); font-size: .85rem; }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN GATE — not linked from customer nav -->
+  <div id="gate" class="gate">
+    <div class="card">
+      <h1>Staff admin</h1>
+      <p>Clara's Beauty Parlour — inventory &amp; photo uploads. Customers cannot see this page from the main menu.</p>
+      <form id="gateForm">
+        <label for="pin">Admin PIN</label>
+        <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" required placeholder="Enter PIN" />
+        <button class="btn btn-block" type="submit">Unlock</button>
+      </form>
+      <p class="muted" style="margin-top:14px;margin-bottom:0">Demo PIN: <code>1234</code> · <a href="index.html">← Back to website</a></p>
+    </div>
+  </div>
+
+  <!-- ADMIN APP -->
+  <div id="app" class="hidden">
+    <header class="app-bar">
+      <div class="app-bar-inner">
+        <div class="brand"><span>C</span> Clara's Admin</div>
+        <div class="tabs">
+          <button type="button" data-tab="inventory" class="active">Inventory</button>
+          <button type="button" data-tab="photos">Photos</button>
+          <button type="button" data-tab="bookings">Bookings</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span id="syncPill" class="status-pill">Local storage</span>
+          <button type="button" class="btn btn-ghost btn-sm" id="logoutBtn">Lock</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- INVENTORY TAB -->
+      <section id="tab-inventory">
+        <div class="stats">
+          <div class="stat"><label>SKUs</label><strong id="statSku">0</strong></div>
+          <div class="stat"><label>Total units</label><strong id="statUnits">0</strong></div>
+          <div class="stat"><label>Low stock</label><strong id="statLow" class="warn">0</strong></div>
+          <div class="stat"><label>Out of stock</label><strong id="statOut" class="danger">0</strong></div>
+        </div>
+        <div class="toolbar">
+          <input type="search" id="searchInv" placeholder="Search name…" />
+          <select id="filterStock">
+            <option value="all">All stock</option>
+            <option value="ok">In stock</option>
+            <option value="low">Low</option>
+            <option value="out">Out</option>
+          </select>
+          <button type="button" class="btn btn-sm" id="btnAddItem">+ Add item</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th><th>Category</th><th>Stock</th><th>Unit</th><th>Price (UGX)</th><th>Status</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="invBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PHOTOS TAB -->
+      <section id="tab-photos" class="hidden">
+        <div class="panel">
+          <h2>Upload photo to gallery</h2>
+          <p class="muted">Photos go to Google Drive (when connected) and appear on the public site gallery. Prefer faceless / studio detail shots.</p>
+          <div class="drop" id="dropZone">
+            <p><strong>Tap or drop an image</strong></p>
+            <p class="muted">JPG, PNG or WebP · max ~2 MB recommended</p>
+            <input type="file" id="fileInput" accept="image/*" />
+          </div>
+          <div class="preview-row hidden" id="previewRow">
+            <img id="previewImg" alt="Preview" />
+            <div style="flex:1">
+              <label>Title</label>
+              <input id="photoTitle" placeholder="e.g. Bridal braids" />
+              <label>Tag</label>
+              <select id="photoTag">
+                <option>Bridal</option><option>Hair</option><option>Nails</option>
+                <option>Makeup</option><option>Men</option><option>Kids</option><option>Studio</option>
+              </select>
+            </div>
+          </div>
+          <button type="button" class="btn" id="btnUpload" disabled>Upload photo</button>
+          <p id="uploadMsg" class="muted"></p>
+        </div>
+        <div class="panel">
+          <h2>Gallery photos</h2>
+          <div class="photo-grid" id="photoGrid"></div>
+          <p id="photoEmpty" class="muted">No photos yet. Upload above.</p>
+        </div>
+      </section>
+
+      <!-- BOOKINGS TAB -->
+      <section id="tab-bookings" class="hidden">
+        <div class="panel">
+          <h2>Recent bookings</h2>
+          <p class="muted">From the website form when Google Sheets is connected. Local-only bookings stay on each device.</p>
+          <div style="overflow-x:auto">
+            <table>
+              <thead>
+                <tr><th>When</th><th>Name</th><th>Phone</th><th>Service</th><th>Date</th><th>Status</th></tr>
+              </thead>
+              <tbody id="bookBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT ITEM MODAL -->
+  <div id="itemModal" class="gate hidden" style="background:rgba(0,0,0,.45)">
+    <div class="card">
+      <h1 id="itemModalTitle">Add item</h1>
+      <form id="itemForm">
+        <input type="hidden" id="itemId" />
+        <label>Name</label>
+        <input id="itemName" required />
+        <div class="grid-2">
+          <div>
+            <label>Category</label>
+            <select id="itemCat">
+              <option>Makeup</option><option>Nails</option><option>Hair Care</option>
+              <option>Tools</option><option>Consumables</option><option>Retail</option>
+            </select>
+          </div>
+          <div>
+            <label>Unit</label>
+            <select id="itemUnit">
+              <option>pcs</option><option>bottle</option><option>tube</option><option>box</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div>
+            <label>Stock</label>
+            <input id="itemStock" type="number" min="0" required value="0" />
+          </div>
+          <div>
+            <label>Price (UGX)</label>
+            <input id="itemPrice" type="number" min="0" value="0" />
+          </div>
+        </div>
+        <label>Notes</label>
+        <input id="itemNotes" />
+        <button class="btn btn-block" type="submit">Save</button>
+        <button class="btn btn-ghost btn-block" type="button" id="itemCancel" style="margin-top:8px">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/sheets-api.js"></script>
+  <script>
+(function () {
+  const PIN = () => (window.CLARA_CONFIG && CLARA_CONFIG.ADMIN_PIN) || '1234';
+  const KEY_INV = 'clara.inventory.v1';
+  const KEY_PHOTOS = 'clara.photos.v1';
+  const KEY_BOOK = 'clara.bookings.v1';
+  const LOW = 5;
+
+  const SEED = [
+    { id: 'inv-1', name: 'HD Foundation (30ml)', category: 'Makeup', stock: 12, unit: 'bottle', price: 65000, notes: '' },
+    { id: 'inv-2', name: 'Compact Powder', category: 'Makeup', stock: 18, unit: 'pcs', price: 32000, notes: '' },
+    { id: 'inv-3', name: 'Gel Nail Polish', category: 'Nails', stock: 3, unit: 'bottle', price: 20000, notes: '' },
+    { id: 'inv-4', name: 'Hair Oil 50ml', category: 'Hair Care', stock: 9, unit: 'bottle', price: 28000, notes: '' },
+    { id: 'inv-5', name: 'Disposable Capes', category: 'Consumables', stock: 40, unit: 'pcs', price: 2500, notes: '' },
+    { id: 'inv-6', name: 'Cotton Pads (500)', category: 'Consumables', stock: 2, unit: 'box', price: 15000, notes: '' },
+    { id: 'inv-7', name: 'Beard Oil', category: 'Retail', stock: 0, unit: 'bottle', price: 35000, notes: '' },
+  ];
+
+  let items = [];
+  let photos = [];
+  let pendingFile = null;
+  let pendingDataUrl = null;
+
+  const $ = (id) => document.getElementById(id);
+
+  function readLS(k, f) {
+    try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : f; } catch { return f; }
+  }
+  function writeLS(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); } catch {}
+  }
+
+  function statusOf(n) {
+    if (n <= 0) return { label: 'Out', cls: 'out' };
+    if (n <= LOW) return { label: 'Low', cls: 'low' };
+    return { label: 'OK', cls: 'ok' };
+  }
+
+  // ----- Auth -----
+  function unlock() {
+    sessionStorage.setItem('clara.admin', '1');
+    sessionStorage.setItem('clara.adminPin', PIN());
+    $('gate').classList.add('hidden');
+    $('app').classList.remove('hidden');
+    boot();
+  }
+  function lock() {
+    sessionStorage.removeItem('clara.admin');
+    sessionStorage.removeItem('clara.adminPin');
+    $('app').classList.add('hidden');
+    $('gate').classList.remove('hidden');
+  }
+  if (sessionStorage.getItem('clara.admin') === '1') unlock();
+
+  $('gateForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if ($('pin').value === PIN()) unlock();
+    else alert('Incorrect PIN');
+  });
+  $('logoutBtn').addEventListener('click', lock);
+
+  // ----- Tabs -----
+  document.querySelectorAll('.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      ['inventory', 'photos', 'bookings'].forEach(t => {
+        $('tab-' + t).classList.toggle('hidden', t !== btn.dataset.tab);
+      });
+    });
+  });
+
+  async function boot() {
+    const api = window.ClaraAPI;
+    const pill = $('syncPill');
+    if (api && api.enabled()) {
+      pill.textContent = 'Google Drive / Sheets';
+      pill.classList.add('on');
+      try {
+        const inv = await api.getInventory();
+        items = (inv.items || []).map(normalise);
+        if (!items.length) items = SEED.slice();
+      } catch {
+        items = readLS(KEY_INV, SEED.slice());
+        pill.textContent = 'Sheets offline — local';
+        pill.classList.remove('on');
+      }
+      try {
+        const g = await api.getGallery();
+        photos = g.photos || [];
+      } catch { photos = readLS(KEY_PHOTOS, []); }
+    } else {
+      items = readLS(KEY_INV, null) || SEED.slice();
+      photos = readLS(KEY_PHOTOS, []);
+      pill.textContent = 'Local storage only';
+      pill.classList.remove('on');
+    }
+    writeLS(KEY_INV, items);
+    renderInv();
+    renderPhotos();
+    renderBookings();
+  }
+
+  function normalise(i) {
+    return {
+      id: String(i.id),
+      name: i.name || '',
+      category: i.category || 'Consumables',
+      stock: Number(i.stock) || 0,
+      unit: i.unit || 'pcs',
+      price: Number(i.price) || 0,
+      notes: i.notes || ''
+    };
+  }
+
+  async function persistInv() {
+    writeLS(KEY_INV, items);
+    if (window.ClaraAPI && ClaraAPI.enabled()) {
+      try { await ClaraAPI.saveInventory(items); } catch (e) { console.warn(e); }
+    }
+  }
+
+  function renderInv() {
+    const q = ($('searchInv').value || '').toLowerCase();
+    const f = $('filterStock').value;
+    let list = items.filter(i => !q || i.name.toLowerCase().includes(q));
+    if (f === 'ok') list = list.filter(i => i.stock > LOW);
+    if (f === 'low') list = list.filter(i => i.stock > 0 && i.stock <= LOW);
+    if (f === 'out') list = list.filter(i => i.stock <= 0);
+
+    $('statSku').textContent = items.length;
+    $('statUnits').textContent = items.reduce((s, i) => s + i.stock, 0);
+    $('statLow').textContent = items.filter(i => i.stock > 0 && i.stock <= LOW).length;
+    $('statOut').textContent = items.filter(i => i.stock <= 0).length;
+
+    $('invBody').innerHTML = list.map(i => {
+      const st = statusOf(i.stock);
+      return `<tr>
+        <td><strong>${esc(i.name)}</strong>${i.notes ? `<div class="muted">${esc(i.notes)}</div>` : ''}</td>
+        <td>${esc(i.category)}</td>
+        <td>${i.stock}</td>
+        <td>${esc(i.unit)}</td>
+        <td>USh ${Number(i.price).toLocaleString()}</td>
+        <td><span class="badge ${st.cls}">${st.label}</span></td>
+        <td class="actions">
+          <button type="button" class="btn btn-ghost btn-sm" data-edit="${i.id}">Edit</button>
+          <button type="button" class="btn btn-danger btn-sm" data-del="${i.id}">Del</button>
+        </td>
+      </tr>`;
+    }).join('') || '<tr><td colspan="7" class="muted">No items</td></tr>';
+  }
+
+  function esc(s) {
+    return String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  }
+
+  $('searchInv').addEventListener('input', renderInv);
+  $('filterStock').addEventListener('change', renderInv);
+
+  $('invBody').addEventListener('click', async (e) => {
+    const ed = e.target.closest('[data-edit]');
+    const del = e.target.closest('[data-del]');
+    if (ed) openItemModal(ed.getAttribute('data-edit'));
+    if (del) {
+      const id = del.getAttribute('data-del');
+      if (!confirm('Delete this item?')) return;
+      items = items.filter(i => i.id !== id);
+      await persistInv();
+      if (window.ClaraAPI && ClaraAPI.enabled()) {
+        try { await ClaraAPI.deleteItem(id); } catch {}
+      }
+      renderInv();
+    }
+  });
+
+  function openItemModal(id) {
+    const item = id ? items.find(i => i.id === id) : null;
+    $('itemModalTitle').textContent = item ? 'Edit item' : 'Add item';
+    $('itemId').value = item ? item.id : '';
+    $('itemName').value = item ? item.name : '';
+    $('itemCat').value = item ? item.category : 'Makeup';
+    $('itemUnit').value = item ? item.unit : 'pcs';
+    $('itemStock').value = item ? item.stock : 0;
+    $('itemPrice').value = item ? item.price : 0;
+    $('itemNotes').value = item ? item.notes : '';
+    $('itemModal').classList.remove('hidden');
+  }
+  $('btnAddItem').addEventListener('click', () => openItemModal(null));
+  $('itemCancel').addEventListener('click', () => $('itemModal').classList.add('hidden'));
+
+  $('itemForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = $('itemId').value || ('inv-' + Date.now());
+    const row = {
+      id,
+      name: $('itemName').value.trim(),
+      category: $('itemCat').value,
+      unit: $('itemUnit').value,
+      stock: parseInt($('itemStock').value, 10) || 0,
+      price: parseInt($('itemPrice').value, 10) || 0,
+      notes: $('itemNotes').value.trim()
+    };
+    const idx = items.findIndex(i => i.id === id);
+    if (idx >= 0) items[idx] = row;
+    else items.push(row);
+    await persistInv();
+    $('itemModal').classList.add('hidden');
+    renderInv();
+  });
+
+  // ----- Photos -----
+  const drop = $('dropZone');
+  const fileInput = $('fileInput');
+  drop.addEventListener('click', () => fileInput.click());
+  drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.classList.add('drag'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('drag'));
+  drop.addEventListener('drop', (e) => {
+    e.preventDefault();
+    drop.classList.remove('drag');
+    if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) handleFile(fileInput.files[0]);
+  });
+
+  function handleFile(file) {
+    if (!file.type.startsWith('image/')) {
+      $('uploadMsg').textContent = 'Please choose an image file.';
+      $('uploadMsg').className = 'err';
+      return;
+    }
+    if (file.size > 3.5 * 1024 * 1024) {
+      $('uploadMsg').textContent = 'Image is large (>3.5MB). Compress it for reliable Drive upload.';
+      $('uploadMsg').className = 'err';
+    }
+    pendingFile = file;
+    const reader = new FileReader();
+    reader.onload = () => {
+      pendingDataUrl = reader.result;
+      $('previewImg').src = pendingDataUrl;
+      $('previewRow').classList.remove('hidden');
+      $('photoTitle').value = file.name.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ');
+      $('btnUpload').disabled = false;
+      $('uploadMsg').textContent = 'Ready to upload.';
+      $('uploadMsg').className = 'muted';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  $('btnUpload').addEventListener('click', async () => {
+    if (!pendingDataUrl) return;
+    $('btnUpload').disabled = true;
+    $('uploadMsg').textContent = 'Uploading…';
+    const title = $('photoTitle').value.trim() || 'Studio photo';
+    const tag = $('photoTag').value;
+    const api = window.ClaraAPI;
+
+    if (api && api.enabled()) {
+      try {
+        const res = await api.uploadPhoto({
+          base64: pendingDataUrl,
+          filename: pendingFile ? pendingFile.name : 'photo.jpg',
+          title,
+          tag
+        });
+        if (res.photo) {
+          photos.unshift(res.photo);
+          writeLS(KEY_PHOTOS, photos);
+          $('uploadMsg').textContent = 'Uploaded to Google Drive & gallery.';
+          $('uploadMsg').className = 'okmsg';
+        }
+      } catch (err) {
+        // local fallback
+        const local = {
+          id: 'img-' + Date.now(),
+          title, tag,
+          url: pendingDataUrl,
+          fileId: '',
+          uploadedAt: new Date().toISOString()
+        };
+        photos.unshift(local);
+        writeLS(KEY_PHOTOS, photos);
+        $('uploadMsg').textContent = 'Saved locally (Sheets/Drive not available): ' + err.message;
+        $('uploadMsg').className = 'err';
+      }
+    } else {
+      const local = {
+        id: 'img-' + Date.now(),
+        title, tag,
+        url: pendingDataUrl,
+        fileId: '',
+        uploadedAt: new Date().toISOString()
+      };
+      photos.unshift(local);
+      writeLS(KEY_PHOTOS, photos);
+      $('uploadMsg').textContent = 'Saved on this device only. Connect Google Sheets (js/config.js) to sync Drive.';
+      $('uploadMsg').className = 'muted';
+    }
+    pendingFile = null;
+    pendingDataUrl = null;
+    $('previewRow').classList.add('hidden');
+    $('btnUpload').disabled = true;
+    fileInput.value = '';
+    renderPhotos();
+  });
+
+  function renderPhotos() {
+    const grid = $('photoGrid');
+    $('photoEmpty').style.display = photos.length ? 'none' : 'block';
+    grid.innerHTML = photos.map(p => `
+      <div class="photo-card">
+        <img src="${esc(p.url)}" alt="${esc(p.title)}" loading="lazy" />
+        <button type="button" class="del" data-pid="${esc(p.id)}" data-fid="${esc(p.fileId || '')}" title="Remove">×</button>
+        <div class="meta"><strong>${esc(p.tag || '')}</strong><br>${esc(p.title || '')}</div>
+      </div>
+    `).join('');
+  }
+
+  $('photoGrid').addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-pid]');
+    if (!btn) return;
+    if (!confirm('Remove this photo?')) return;
+    const id = btn.getAttribute('data-pid');
+    const fileId = btn.getAttribute('data-fid');
+    photos = photos.filter(p => String(p.id) !== id);
+    writeLS(KEY_PHOTOS, photos);
+    if (window.ClaraAPI && ClaraAPI.enabled()) {
+      try { await ClaraAPI.deletePhoto(id, fileId); } catch {}
+    }
+    renderPhotos();
+  });
+
+  // ----- Bookings -----
+  async function renderBookings() {
+    let rows = readLS(KEY_BOOK, []);
+    if (window.ClaraAPI && ClaraAPI.enabled()) {
+      try {
+        const r = await ClaraAPI.getBookings();
+        rows = r.bookings || rows;
+      } catch {}
+    }
+    $('bookBody').innerHTML = (rows || []).slice(0, 30).map(b => `
+      <tr>
+        <td>${esc((b.createdAt || '').toString().slice(0, 16))}</td>
+        <td>${esc(b.name)}</td>
+        <td>${esc(b.phone)}</td>
+        <td>${esc(b.service)}</td>
+        <td>${esc(b.date)} ${esc(b.time || '')}</td>
+        <td>${esc(b.status || 'pending')}</td>
+      </tr>
+    `).join('') || '<tr><td colspan="6" class="muted">No bookings yet</td></tr>';
+  }
+})();
+  </script>
+</body>
+</html>

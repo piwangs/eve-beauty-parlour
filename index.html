@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Clara's Beauty Parlour — Bridal Makeup, Facials & Hair Styling | Kampala & Juba</title>
 
-<meta name="description" content="Clara's Beauty Parlour — bridal makeup, facials, hair styling, waxing and more. Serving Kampala and Juba. Call +256 784 116 923 or +211 928 156 799.">
+<meta name="description" content="Clara's Beauty Parlour — bridal makeup, facials, hair styling, waxing & more. Kampala & Juba studios. Welcoming clients across East Africa: Uganda, Kenya, Tanzania, Rwanda, Burundi & South Sudan.">
 <meta name="theme-color" content="#b0587a">
-<link rel="canonical" href="https://YOUR_USERNAME.github.io/eve-beauty-parlour/">
+<link rel="canonical" href="https://piwangs.github.io/clarabeautyparlour/">
 
 <meta property="og:type" content="business.business">
 <meta property="og:title" content="Clara's Beauty Parlour — Kampala & Juba">
-<meta property="og:description" content="Bridal makeup, facials, hair styling and more. Two locations.">
+<meta property="og:description" content="Clara's Beauty Parlour — bridal makeup, hair, facials & more. Serving East Africa from Kampala & Juba. Uganda, Kenya, Tanzania, Rwanda, Burundi, South Sudan.">
 <meta property="og:image" content="./images/og-preview.jpg">
-<meta property="og:url" content="https://YOUR_USERNAME.github.io/eve-beauty-parlour/">
+<meta property="og:url" content="https://piwangs.github.io/clarabeautyparlour/">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23c96f92'/%3E%3Cstop offset='100%25' stop-color='%238e4260'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23g)'/%3E%3Ccircle cx='256' cy='196' r='72' fill='%23fdf7f4'/%3E%3Cpath d='M256 296c-62 0-112 42-112 94v10h224v-10c0-52-50-94-112-94z' fill='%23fdf7f4'/%3E%3C/svg%3E">
@@ -23,10 +23,12 @@
   "@context": "https://schema.org",
   "@type": "BeautySalon",
   "name": "Clara's Beauty Parlour",
-  "url": "https://YOUR_USERNAME.github.io/eve-beauty-parlour/",
+  "url": "https://piwangs.github.io/clarabeautyparlour/",
   "telephone": ["+256-784-116-923", "+211-928-156-799"],
   "email": "inno.piwangz@gmail.com",
   "priceRange": "$$",
+  "areaServed": ["UG","KE","TZ","RW","BI","SS","ET"],
+  "description": "Bridal makeup, hair styling, facials and beauty services in Kampala and Juba, welcoming clients from across East Africa.",
   "address": {"@type": "PostalAddress","streetAddress": "Plot 12, Kampala Road","addressLocality": "Kampala","addressCountry": "UG"},
   "geo": {"@type": "GeoCoordinates","latitude": 0.3152,"longitude": 32.5816},
   "openingHoursSpecification": [{"@type": "OpeningHoursSpecification","dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens": "09:00","closes": "20:00"}]
@@ -153,6 +155,24 @@ ul{margin:0 0 1em;padding-left:1.1em}
 .gallery-cta h3{font-size:1.4rem}
 .gallery-cta p{color:var(--muted);max-width:48ch;margin:0 auto 22px}
 .gallery-cta .btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+.carousel-track .slide{background-size:cover !important;background-position:center !important}
+.carousel-track .slide-inner{text-shadow:0 2px 12px rgba(0,0,0,.35)}
+
+
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
+@media(min-width:640px){.gallery-grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+@media(min-width:900px){.gallery-grid{grid-template-columns:repeat(4,1fr)}}
+.gallery-item{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1;background:var(--primary-soft);box-shadow:0 4px 20px rgba(43,32,39,.08)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 12px 12px;background:linear-gradient(transparent,rgba(30,15,25,.75));color:#fff;font-size:.82rem;font-weight:600}
+.gallery-item .tag{display:inline-block;background:rgba(255,255,255,.22);backdrop-filter:blur(4px);padding:2px 8px;border-radius:999px;font-size:.7rem;margin-bottom:4px}
+.gallery-note{text-align:center;margin-top:20px;color:var(--muted);font-size:.9rem}
+.gallery-note a{font-weight:600}
+.ea-flags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0 8px}
+.ea-flags span{background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:.8rem;color:var(--ink)}
+
 
 .form{display:grid;gap:16px}
 .field{display:flex;flex-direction:column;gap:6px}
@@ -317,9 +337,9 @@ ul{margin:0 0 1em;padding-left:1.1em}
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow">Serving Kampala & Juba · Since 2015</p>
+        <p class="eyebrow">Kampala & Juba · Serving East Africa · Since 2015</p>
         <h1>Look radiant for every occasion</h1>
-        <p class="lead">Bridal makeup, glowing facials, precision hair styling and pampering treatments — all under one roof, by stylists who listen.</p>
+        <p class="lead">Bridal makeup, glowing facials, precision hair styling and pampering treatments — welcoming clients from Uganda, Kenya, Tanzania, Rwanda, Burundi and South Sudan.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" onclick="scrollToId('booking')">Book an appointment</a>
           <a class="btn btn-ghost" href="#" id="heroWa">Chat on WhatsApp</a>
@@ -360,15 +380,53 @@ ul{margin:0 0 1em;padding-left:1.1em}
     </div>
   </section>
 
-  <section id="gallery" class="section section-alt">
+    <section id="gallery" class="section section-alt">
     <div class="container">
-      <div class="gallery-cta" data-reveal>
-        <h3>See our recent work</h3>
-        <p>Our photo gallery is being updated. In the meantime, message us on WhatsApp and we'll send you photos and videos of recent bridal, hair and makeup work.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" id="galleryWaUG" href="#">WhatsApp 🇺🇬 Uganda</a>
-          <a class="btn btn-primary" id="galleryWaSS" href="#">WhatsApp 🇸🇸 South Sudan</a>
-        </div>
+      <div class="section-head center" data-reveal>
+        <h2>See our recent work</h2>
+        <p>Faceless, studio-style looks inspired by East African beauty — braids, bridal prep, nails, grooming and colour.</p>
+      </div>
+      <div class="gallery-grid" data-reveal>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=600&fit=crop&q=80" alt="Hair styling tools and hands at work" loading="lazy" width="600" height="600">
+          <figcaption><span class="tag">Hair</span><br>Precision styling</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=600&fit=crop&q=80" alt="Soft waves hair detail from behind" loading="lazy" width="600" height="600">
+          <figcaption><span class="tag">Women</span><br>Soft waves & finish</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=600&fit=crop&q=80" alt="Manicure nail art close-up" loading="lazy" width="600" height="600">
+          <figcaption><span class="tag">Nails</span><br>Manicure & polish</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&h=600&fit=crop&q=80" alt="Makeup brushes and palette" loading="lazy" width="600" height="600">
+          <figcaption><span class="tag">Makeup</span><br>Bridal & party kits</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=600&h=600&fit=crop&q=80" alt="Gel nails detail" loading="lazy" width="600" height="600">
+          <figcaption><span class="tag">Nails</span><br>Gel finish</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&h=600&fit=crop&q=80" alt="Beard grooming barber work" loading="lazy" width="600" height="600">
+          <figcaption><span class="tag">Men</span><br>Beard & cut</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop&q=80" alt="Braided hair from behind" loading="lazy" width="600" height="600">
+          <figcaption><span class="tag">Braids</span><br>Protective styles</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&h=600&fit=crop&q=80" alt="Makeup application close on eyes" loading="lazy" width="600" height="600">
+          <figcaption><span class="tag">Bridal</span><br>HD makeup detail</figcaption>
+        </figure>
+      </div>
+      <p class="gallery-note">Photos are royalty-free studio references (Unsplash). Send your own event photos on WhatsApp and we can feature real Clara’s looks.
+        <br><a id="galleryWaUG" href="#">WhatsApp Uganda</a> · <a id="galleryWaSS" href="#">WhatsApp South Sudan</a>
+      </p>
+      <div class="ea-flags" data-reveal>
+        <span>🇺🇬 Uganda</span><span>🇰🇪 Kenya</span><span>🇹🇿 Tanzania</span>
+        <span>🇷🇼 Rwanda</span><span>🇧🇮 Burundi</span><span>🇸🇸 South Sudan</span>
+        <span>🇪🇹 Ethiopia</span>
       </div>
     </div>
   </section>
@@ -377,7 +435,7 @@ ul{margin:0 0 1em;padding-left:1.1em}
     <div class="container about-grid">
       <div data-reveal>
         <h2>Why clients choose Clara's</h2>
-        <p class="lead">Skilled stylists, quality products, and a calm space where you can actually relax.</p>
+        <p class="lead">Skilled stylists, quality products, and a calm space — trusted by clients across Kampala, Juba and the wider East African region.</p>
         <ul class="tick-list">
           <li>Personalised consultation before every service</li>
           <li>Single-use tools for waxing and threading</li>
@@ -444,7 +502,7 @@ ul{margin:0 0 1em;padding-left:1.1em}
     <div class="container">
       <div class="section-head" data-reveal>
         <h2>Find us & get directions</h2>
-        <p>Share your location for live driving, transit or walking directions straight to our door.</p>
+        <p>Studio in Kampala · WhatsApp booking for Juba and visitors from Kenya, Tanzania, Rwanda, Burundi and beyond. Share your location for directions to our door.</p>
       </div>
       <div class="contact-grid">
         <div data-reveal>
@@ -545,7 +603,7 @@ ul{margin:0 0 1em;padding-left:1.1em}
   <div class="container footer-inner">
     <p>© <span id="year"></span> Clara's Beauty Parlour</p>
     <p class="footer-links">
-      <a onclick="showPage('inventory');return false;">Staff</a>
+      <a href="inventory.html">Staff admin</a>
       <a onclick="showPage('home');scrollToId('booking');return false;">Book</a>
     </p>
   </div>
@@ -608,9 +666,15 @@ const EVE_CONFIG = {
   baseCurrency: 'UGX',
   activeCurrency: 'UGX',
   currencies: {
-    UGX: { symbol:'USh', name:'Ugandan Shilling', rate:1,       decimals:0, locale:'en-UG', indicative:false },
-    SSP: { symbol:'SSP', name:'South Sudanese Pound', rate:0.75, decimals:0, locale:'en-SS', indicative:true },
-    USD: { symbol:'$',   name:'US Dollar', rate:0.00027, decimals:2, locale:'en-US', indicative:true }
+    // Base = Uganda Shilling. Other rates are indicative (update anytime).
+    UGX: { symbol:'USh', name:'Ugandan Shilling',     rate:1,        decimals:0, locale:'en-UG', indicative:false },
+    KES: { symbol:'KSh', name:'Kenyan Shilling',      rate:0.035,    decimals:0, locale:'en-KE', indicative:true },
+    TZS: { symbol:'TSh', name:'Tanzanian Shilling',   rate:0.68,     decimals:0, locale:'en-TZ', indicative:true },
+    RWF: { symbol:'FRw', name:'Rwandan Franc',        rate:0.35,     decimals:0, locale:'en-RW', indicative:true },
+    BIF: { symbol:'FBu', name:'Burundian Franc',      rate:0.76,     decimals:0, locale:'en-BI', indicative:true },
+    SSP: { symbol:'SSP', name:'South Sudanese Pound', rate:0.75,     decimals:0, locale:'en-SS', indicative:true },
+    ETB: { symbol:'Br',  name:'Ethiopian Birr',       rate:0.015,    decimals:2, locale:'en-ET', indicative:true },
+    USD: { symbol:'$',   name:'US Dollar',            rate:0.00027,  decimals:2, locale:'en-US', indicative:true }
   },
 
   inventoryPin: '1234',
@@ -620,7 +684,7 @@ const EVE_CONFIG = {
 
 const SLIDES = [
   {
-    bg: 'linear-gradient(135deg, #b0587a 0%, #8e4260 100%)',
+    bg: 'linear-gradient(135deg, rgba(176,88,122,.92), rgba(142,66,96,.95)), url(https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&q=80) center/cover',
     eyebrow: 'Bridal Season',
     title: 'Book your trial before 15 December',
     subtitle: 'Full bridal package — USh 600,000 · trial included',
@@ -628,20 +692,28 @@ const SLIDES = [
     ctaAction: "scrollToId('booking')"
   },
   {
-    bg: 'linear-gradient(135deg, #c9a227 0%, #8b6914 100%)',
-    eyebrow: 'Now serving men & kids',
-    title: 'Haircuts, grooming & party styling',
+    bg: 'linear-gradient(135deg, rgba(201,162,39,.9), rgba(139,105,20,.95)), url(https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=80) center/cover',
+    eyebrow: 'Men · Women · Kids · Unisex',
+    title: 'Hair, makeup & grooming for the whole family',
     subtitle: 'Men from USh 25,000 · Kids from USh 15,000',
     cta: 'See services',
     ctaAction: "scrollToId('services')"
   },
   {
-    bg: 'linear-gradient(135deg, #5d3e8e 0%, #3d2662 100%)',
-    eyebrow: 'Two countries',
-    title: 'Kampala & Juba — one team',
-    subtitle: 'Call or WhatsApp either office',
+    bg: 'linear-gradient(135deg, rgba(93,62,142,.9), rgba(61,38,98,.95)), url(https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=1600&q=80) center/cover',
+    eyebrow: 'East Africa',
+    title: 'Kampala & Juba — open to all East Africa',
+    subtitle: 'Uganda · Kenya · Tanzania · Rwanda · Burundi · South Sudan',
     cta: 'Contact us',
     ctaAction: "scrollToId('contact')"
+  },
+  {
+    bg: 'linear-gradient(135deg, rgba(176,88,122,.88), rgba(90,40,60,.92)), url(https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=1600&q=80) center/cover',
+    eyebrow: 'Our work',
+    title: 'Braids, colour, nails & bridal looks',
+    subtitle: 'Scroll to see recent styles from our studio',
+    cta: 'View gallery',
+    ctaAction: "scrollToId('gallery')"
   }
 ];
 
@@ -706,7 +778,7 @@ function money(baseAmount) {
   const cur = EVE_CONFIG.currencies[code];
   if (!cur) return String(baseAmount);
   let v = (Number(baseAmount) || 0) * cur.rate;
-  if (code === 'UGX' || code === 'SSP') v = Math.round(v / 500) * 500;
+  if (['UGX','SSP','KES','TZS','RWF','BIF'].includes(code)) v = Math.round(v / 100) * 100;
   const formatted = v.toLocaleString(cur.locale || 'en-US', {
     minimumFractionDigits: cur.decimals, maximumFractionDigits: cur.decimals
   });
@@ -1162,7 +1234,7 @@ function downloadCSV(selector) {
 (function initCurrencyPicker() {
   const sel = document.getElementById('currencySelect');
   if (!sel) return;
-  const order = ['UGX', 'SSP', 'USD'];
+  const order = ['UGX', 'KES', 'TZS', 'RWF', 'BIF', 'SSP', 'ETB', 'USD'];
   sel.innerHTML = order.filter(c => EVE_CONFIG.currencies[c]).map(code => {
     const c = EVE_CONFIG.currencies[code];
     const tag = c.indicative ? ' (indicative)' : ' (base)';
@@ -1265,6 +1337,27 @@ function downloadCSV(selector) {
     if (b) handleMessage(b.dataset.q);
   });
 })();
+</script>
+<script src="js/config.js"></script>
+<script src="js/sheets-api.js"></script>
+<script>
+// Optional: load gallery photos from Google Sheets when configured
+document.addEventListener("DOMContentLoaded", async function () {
+  if (!window.ClaraAPI || !ClaraAPI.enabled()) return;
+  try {
+    const g = await ClaraAPI.getGallery();
+    const photos = (g.photos || []).filter(p => p.url);
+    if (!photos.length) return;
+    const grid = document.querySelector("#gallery .gallery-grid");
+    if (!grid) return;
+    grid.innerHTML = photos.slice(0, 12).map(function (p) {
+      return '<figure class="gallery-item">' +
+        '<img src="' + String(p.url).replace(/"/g, "&quot;") + '" alt="' + String(p.title || "Gallery").replace(/"/g, "&quot;") + '" loading="lazy">' +
+        '<figcaption><span class="tag">' + String(p.tag || "Studio").replace(/"/g, "&quot;") + '</span><br>' +
+        String(p.title || "").replace(/</g, "&lt;") + '</figcaption></figure>';
+    }).join("");
+  } catch (e) { console.warn("Gallery sync", e); }
+});
 </script>
 </body>
 </html>
